@@ -1,0 +1,15 @@
+# Compiled executables
+*.exe
+*.o
+*.out
+
+# Temp files
+tempCodeRunnerFile.*
+DAA1.*
+DAA2.*
+DAA3.*
+DAA4.*
+FA_Comparison_Report.txt
+
+# VSCode settings
+.vscode/

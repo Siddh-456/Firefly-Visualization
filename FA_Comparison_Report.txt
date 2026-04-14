@@ -1,0 +1,14 @@
+FIREFLY ALGORITHM COMPARISON REPORT
+====================================
+N=8  POP=24  MAX_ITER=120
+
+Best Fitness:  Orig=28  Mod=28
+Avg Fitness:   Orig=28  Mod=27.0417
+Iter to Opt:   Orig=2  Mod=0
+Optimal Hits:  Orig=46  Mod=48
+Diversity:     Orig=0.728714  Mod=0.779438
+
+Score: 2/5
+Verdict: Moderate improvement
+
+Params: a0=0.9 mut=0.2 elite=2
