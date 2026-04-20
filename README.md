@@ -1,9 +1,11 @@
 <div align="center">
   <h1>Enhanced Firefly Algorithm for N-Queens</h1>
-  <p><strong>A C++17 + Raylib visualizer for solving the N-Queens problem with a modified Firefly Algorithm built for faster convergence, better stability, and clear real-time analysis.</strong></p>
+  <p><strong>A C++17 desktop visualizer solving the N-Queens problem with a modified Firefly Algorithm — built for faster convergence, better stability, and rich real-time analysis.</strong></p>
   <p>
     <img src="https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++17" />
     <img src="https://img.shields.io/badge/Raylib-5.x-111111?style=for-the-badge" alt="Raylib 5.x" />
+    <img src="https://img.shields.io/badge/OpenGL-Graphics-5586A4?style=for-the-badge&logo=opengl" alt="OpenGL" />
+    <img src="https://img.shields.io/badge/SFML-Audio-8CC445?style=for-the-badge" alt="SFML" />
     <img src="https://img.shields.io/badge/Problem-N--Queens-8A2BE2?style=for-the-badge" alt="N-Queens" />
     <img src="https://img.shields.io/badge/Focus-Swarm%20Optimization-0A7E8C?style=for-the-badge" alt="Swarm Optimization" />
     <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-3A3A3A?style=for-the-badge" alt="Windows and Linux" />
@@ -16,6 +18,7 @@
 
 <p align="center">
   <a href="#overview">Overview</a> |
+  <a href="#built-with">Built With</a> |
   <a href="#algorithm-design">Algorithm Design</a> |
   <a href="#visual-gallery">Visual Gallery</a> |
   <a href="#results">Results</a> |
@@ -28,17 +31,30 @@
 
 This project solves the N-Queens problem using an enhanced Firefly Algorithm adapted for a discrete permutation search space. Instead of treating the problem like a generic continuous optimizer, the implementation redesigns the movement, repair, mutation, and initialization stages so the swarm can work on valid chessboard configurations directly.
 
-The result is a visually rich desktop application that lets you watch the swarm evolve in real time, compare the original and modified Firefly Algorithm side by side, inspect convergence behavior, and tune parameters live.
+The result is a visually rich desktop application that lets you watch the swarm evolve in real time, compare the original and modified Firefly Algorithm side by side, inspect convergence behavior, tune parameters live, and hear audio feedback tied to algorithm events.
+
+## Built With
+
+| Layer | Tools and Technologies |
+| --- | --- |
+| Language | C++17 |
+| Graphics | Raylib 5.x with OpenGL backend |
+| Rendering | OpenGL (via Raylib) for hardware-accelerated 2D/3D rendering |
+| Audio | SFML Audio for procedural sound effects and event-driven feedback |
+| Algorithm | Custom Firefly Algorithm (swarm metaheuristic, discrete permutation space) |
+| Build | g++ / MinGW (Windows), g++ (Linux) |
+| Platform | Windows, Linux |
 
 ## Why This Version Is Better
 
-- Uses permutation-based board encoding, so each solution always represents one queen per row and one queen per column.
+- Uses permutation-based board encoding so each solution always represents one queen per row and one queen per column.
 - Tracks fitness through non-attacking queen pairs, focusing conflict analysis on diagonals only.
 - Adds adaptive randomness so the search explores early and sharpens later.
 - Uses swap-based mutation to increase diversity without breaking permutation validity.
 - Seeds part of the population with heuristic initialization for stronger starting states.
 - Preserves top candidates with elitism and restores diversity through stagnation handling.
 - Visualizes convergence, conflicts, heatmaps, and comparison metrics in one interface.
+- Plays event-driven audio feedback on convergence, stagnation, and conflict resolution via SFML.
 
 ## Algorithm Design
 
@@ -62,6 +78,17 @@ The result is a visually rich desktop application that lets you watch the swarm 
 | Elitism | Carries the best fireflies into the next generation unchanged |
 | Repair mechanism | Fixes duplicate or missing column values after movement |
 | Stagnation detection | Reinjects diversity when progress stalls |
+
+## Feature Set
+
+- Real-time chessboard visualization of the current best solution
+- Side-by-side comparison mode for original vs modified Firefly Algorithm
+- Convergence graphs for best, average, and worst fitness
+- Heatmap-based search-space analysis
+- Conflict visualization for attacking queens
+- Live parameter control for board size, mutation rate, alpha, heuristic ratio, and elitism
+- Hardware-accelerated rendering via OpenGL through Raylib
+- Procedural audio feedback using SFML tied to algorithm events (convergence, stagnation, conflict resolution)
 
 ## Visual Gallery
 
@@ -97,25 +124,16 @@ The modified Firefly Algorithm consistently performs better than the baseline ve
 | Population quality | Lower average fitness | Stronger average fitness across iterations |
 | Search coverage | Tends to narrow early | Explores more broadly before converging |
 
-## Feature Set
-
-- Real-time chessboard visualization of the current best solution
-- Side-by-side comparison mode for original vs modified Firefly Algorithm
-- Convergence graphs for best, average, and worst fitness
-- Heatmap-based search-space analysis
-- Conflict visualization for attacking queens
-- Live parameter control for board size, mutation rate, alpha, heuristic ratio, and elitism
-
 ## Run On Your PC
-
-`DAA3.cpp` and `nqueen.cpp` currently contain the same implementation. The commands below use `DAA3.cpp`, but you can compile either file.
 
 ### 1. Prerequisites
 
-- A C++17-compatible compiler such as `g++`
-- [Raylib](https://www.raylib.com/) installed and linked on your system
+- C++17-compatible compiler (g++ / MinGW)
+- [Raylib 5.x](https://www.raylib.com/) installed and linked
+- [SFML](https://www.sfml-dev.org/) installed (for audio)
+- OpenGL drivers (present on any modern system)
 
-### 2. Clone or Download the Repository
+### 2. Clone or Download
 
 ```bash
 git clone <your-repo-url>
@@ -126,16 +144,14 @@ cd DAA
 
 **Windows with MinGW**
 
-Update the Raylib include and library paths if your installation lives somewhere else.
-
 ```bash
-g++ DAA3.cpp -o firefly_nqueens.exe -I"C:\raylib\src" -L"C:\raylib\src" -lraylib -lopengl32 -lgdi32 -lwinmm -std=c++17
+g++ DAA3.cpp -o firefly_nqueens.exe -I"C:\raylib\src" -L"C:\raylib\src" -lraylib -lopengl32 -lgdi32 -lwinmm -lsfml-audio -lsfml-system -std=c++17
 ```
 
 **Linux**
 
 ```bash
-g++ DAA3.cpp -o firefly_nqueens -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -std=c++17
+g++ DAA3.cpp -o firefly_nqueens -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -lsfml-audio -lsfml-system -std=c++17
 ```
 
 ### 4. Run
@@ -152,20 +168,22 @@ g++ DAA3.cpp -o firefly_nqueens -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -std
 ./firefly_nqueens
 ```
 
-### 5. Quick Start Inside the App
+### 5. Controls
 
-- Press `M` to run the modified Firefly Algorithm
-- Press `O` to run the original Firefly Algorithm
-- Press `B` to compare both modes together
-- Press `Space` to play or pause
-- Press `Right Arrow` to single-step the simulation
-- Press `R` to reset the run
-- Press `Up` or `Down` to change `N`
-- Press `C` to toggle conflict view
-- Press `T` to toggle trails
-- Press `E` to expand the graph panel
-- Press `X` to show or hide the comparison table
-- Press `H` to open the theory panel
+| Key | Action |
+| --- | --- |
+| `M` | Run modified Firefly Algorithm |
+| `O` | Run original Firefly Algorithm |
+| `B` | Compare both modes side by side |
+| `Space` | Play or pause |
+| `Right Arrow` | Single-step the simulation |
+| `R` | Reset the run |
+| `Up / Down` | Change N |
+| `C` | Toggle conflict view |
+| `T` | Toggle trails |
+| `E` | Expand graph panel |
+| `X` | Show or hide comparison table |
+| `H` | Open theory panel |
 
 ## Project Structure
 
@@ -193,5 +211,5 @@ DAA/
 
 1. Xin-She Yang, *Firefly Algorithm, Stochastic Test Functions and Design Optimisation*, International Journal of Bio-Inspired Computation, 2010.
 2. Raylib Documentation: https://www.raylib.com/
-3. GeeksforGeeks, N-Queen Problem: https://www.geeksforgeeks.org/n-queen-problem/
-
+3. SFML Documentation: https://www.sfml-dev.org/documentation/
+4. GeeksforGeeks, N-Queen Problem: https://www.geeksforgeeks.org/n-queen-problem/
