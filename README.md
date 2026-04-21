@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Enhanced Firefly Algorithm for N-Queens</h1>
-  <p><strong>A C++17 desktop visualizer solving the N-Queens problem with a modified Firefly Algorithm — built for faster convergence, better stability, and rich real-time analysis.</strong></p>
+  <p><strong>A C++17 desktop visualizer solving the N-Queens problem with a modified Firefly Algorithm built for faster convergence, better stability, and rich real-time analysis.</strong></p>
   <p>
     <img src="https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++17" />
     <img src="https://img.shields.io/badge/Raylib-5.x-111111?style=for-the-badge" alt="Raylib 5.x" />
